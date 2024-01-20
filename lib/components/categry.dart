@@ -1,0 +1,104 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:swift_cafe/models/categry_models.dart';
+import 'package:swift_cafe/screans/select_item_screan.dart';
+
+class Categry extends StatelessWidget {
+  CategryModels categryModels;
+  Categry(this.categryModels);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+       Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return SelectItemScreans(categryModels);
+       },));
+      },
+      child: Container(
+
+        margin: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+          width: 250,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            color: Colors.white60.withOpacity(.3),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.6),
+                spreadRadius: 3,
+                blurRadius: 5,
+                offset: Offset(1, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: Stack(
+
+            children: [
+              Positioned(
+                top: 40,
+                left: 50,
+
+                child: Container(
+                  width: 150,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(categryModels.image), fit: BoxFit.fill),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 191,
+                left: 30,
+                child: Text(
+                  categryModels.name,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: "YesevaOne"),
+                ),
+              ),
+
+              Positioned(
+                top: 220,
+                left: 30,
+                child: SizedBox(
+                  width: 140,
+                  child: Text(
+                    categryModels.desc,
+                    style: TextStyle(color: Colors.black, fontSize: 15),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+
+                  ),
+                ),
+              ),
+
+              Positioned(
+                top: 240,
+                left: 30,
+                child: Text(
+
+
+                  categryModels.rate.toString(),
+                  style: TextStyle(color: Colors.black, fontSize: 15),
+                ),
+              ),
+              Positioned(
+                  right: 10,
+                  top: 220,
+                  child:Container(
+
+                    width: 50,
+                    height: 50,
+                    color: Colors.green,
+                    child: Icon(Icons.add,color: Colors.white),
+                  )
+              ),
+            ],
+          )),
+    );
+  }
+}
