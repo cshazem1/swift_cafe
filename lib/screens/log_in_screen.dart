@@ -1,17 +1,11 @@
-import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:swift_cafe/screans/home_screan.dart';
-
-import '../components/custom_button.dart';
 import '../components/text_field_components.dart';
 import '../components/text_field_password_components.dart';
-import '../cuibt/dtails_sign_cuibt/get_bool_click_sign_cubit.dart';
-
-class LogInScrean extends StatelessWidget {
-  const LogInScrean({
+import '../cuibt/details_sign_cuibt/get_bool_click_sign_cubit.dart';
+class LogInScreen extends StatelessWidget {
+  const LogInScreen({
     super.key,
   });
 
@@ -22,10 +16,10 @@ class LogInScrean extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
-          SizedBox(
+          const SizedBox(
             height: 65,
             width: 65,
             child: Image(
@@ -34,28 +28,23 @@ class LogInScrean extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text(
+          const Text(
             'Swift',
             style: TextStyle(
                 color: Colors.white, fontSize: 50, fontFamily: 'YesevaOne'),
           ),
-          Text(
+          const Text(
             'Cafe',
             style: TextStyle(
                 color: Colors.white, fontSize: 30, fontFamily: 'YesevaOne'),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
-            child: Text("Latte but never late",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15)),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(.2),
               boxShadow: [
@@ -63,20 +52,25 @@ class LogInScrean extends StatelessWidget {
                   color: Colors.white.withOpacity(.6),
                   spreadRadius: 6,
                   blurRadius: 8,
-                  offset: Offset(0, 2), // changes position of shadow
+                  offset: const Offset(0, 2), // changes position of shadow
                 ),
               ],
             ),
+            child: const Text("Latte but never late",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15)),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          TextFieldComponent(
+          const TextFieldComponent(
               labelText: "User Name", hintText: "Enter your Name"),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          TextFieldPasswordComponents(
+          const TextFieldPasswordComponents(
               labelText: "Password", hintText: "Enter your Password"),
         ],
       ),

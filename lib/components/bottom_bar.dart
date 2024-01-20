@@ -1,27 +1,30 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-import '../screans/home_screan.dart';
+import '../screens/home_screen.dart';
 
 class BottomBar extends StatefulWidget {
+  const BottomBar({super.key});
+
   @override
-  _BottomBarState createState() => _BottomBarState();
+  BottomBarState createState() => BottomBarState();
 }
 
-class _BottomBarState extends State<BottomBar> {
-
+class BottomBarState extends State<BottomBar> {
   int _selectedIndex = 0;
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child:_selectedIndex==0?HomeScrean():_selectedIndex==1?Text("wow"):Text("data")
-      ),
+          child: _selectedIndex == 0
+              ? HomeScreen()
+              : _selectedIndex == 1
+                  ? const Text("wow")
+                  : const Text("data")),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
           boxShadow: [
             BoxShadow(
@@ -39,11 +42,11 @@ class _BottomBarState extends State<BottomBar> {
               gap: 8,
               activeColor: Colors.deepOrange,
               iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              duration: Duration(milliseconds: 400),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              duration: const Duration(milliseconds: 400),
               tabBackgroundColor: Colors.grey.withOpacity(.3),
               color: Colors.black,
-              tabs: [
+              tabs: const [
                 GButton(
                   icon: Icons.home,
                   text: 'Home',

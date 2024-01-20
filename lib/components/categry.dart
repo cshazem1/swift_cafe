@@ -1,50 +1,48 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:swift_cafe/models/categry_models.dart';
-import 'package:swift_cafe/screans/select_item_screan.dart';
 
+import '../screens/select_item_screen.dart';
 class Categry extends StatelessWidget {
-  CategryModels categryModels;
-  Categry(this.categryModels);
-
+ final CategryModels categryModels;
+  const Categry(this.categryModels, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return SelectItemScreans(categryModels);
-       },));
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return SelectItemScreen(categryModels);
+          },
+        ));
       },
       child: Container(
-
-        margin: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           width: 250,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
             color: Colors.white60.withOpacity(.3),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.6),
                 spreadRadius: 3,
                 blurRadius: 5,
-                offset: Offset(1, 3), // changes position of shadow
+                offset: const Offset(1, 3), // changes position of shadow
               ),
             ],
           ),
           child: Stack(
-
             children: [
               Positioned(
                 top: 40,
                 left: 50,
-
                 child: Container(
                   width: 150,
                   height: 150,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(categryModels.image), fit: BoxFit.fill),
+                        image: NetworkImage(categryModels.image),
+                        fit: BoxFit.fill),
                   ),
                 ),
               ),
@@ -53,14 +51,13 @@ class Categry extends StatelessWidget {
                 left: 30,
                 child: Text(
                   categryModels.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                       fontFamily: "YesevaOne"),
                 ),
               ),
-
               Positioned(
                 top: 220,
                 left: 30,
@@ -68,35 +65,29 @@ class Categry extends StatelessWidget {
                   width: 140,
                   child: Text(
                     categryModels.desc,
-                    style: TextStyle(color: Colors.black, fontSize: 15),
+                    style: const TextStyle(color: Colors.black, fontSize: 15),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-
                   ),
                 ),
               ),
-
               Positioned(
                 top: 240,
                 left: 30,
                 child: Text(
-
-
                   categryModels.rate.toString(),
-                  style: TextStyle(color: Colors.black, fontSize: 15),
+                  style: const TextStyle(color: Colors.black, fontSize: 15),
                 ),
               ),
               Positioned(
                   right: 10,
                   top: 220,
-                  child:Container(
-
+                  child: Container(
                     width: 50,
                     height: 50,
                     color: Colors.green,
-                    child: Icon(Icons.add,color: Colors.white),
-                  )
-              ),
+                    child: const Icon(Icons.add, color: Colors.white),
+                  )),
             ],
           )),
     );

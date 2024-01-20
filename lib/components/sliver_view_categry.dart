@@ -14,18 +14,16 @@ class SliverListCategry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverList(
-
         delegate: SliverChildBuilderDelegate(
-          childCount: list.length,
-              (context, index) {
-
-            return SizedBox(
-                height: 280,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Categry(list[index]),
-                ));
-
-          },));
+      childCount: list.length,
+      (context, index) {
+        return SizedBox(
+            height: 280,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: Categry(list[index]),
+            ));
+      },
+    ));
   }
 }
