@@ -3,9 +3,10 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:swift_cafe/models/categry_models.dart';
+
 @immutable
 class SelectItemScreen extends StatelessWidget {
- final CategryModels categryModels;
+  final CategryModels categryModels;
   const SelectItemScreen(this.categryModels, {super.key});
 
   @override
@@ -17,7 +18,8 @@ class SelectItemScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage("https://th.bing.com/th/id/OIP.xesubJn0DWYf6t60IW0FdQHaD5?rs=1&pid=ImgDetMain"), // Replace with your image path
+                image: NetworkImage(
+                    "https://th.bing.com/th/id/OIP.xesubJn0DWYf6t60IW0FdQHaD5?rs=1&pid=ImgDetMain"), // Replace with your image path
                 fit: BoxFit.cover,
               ),
             ),
@@ -167,6 +169,7 @@ class SelectItemScreen extends StatelessWidget {
     );
   }
 }
+
 @immutable
 class CheckBoxCustom extends StatefulWidget {
   const CheckBoxCustom({
@@ -178,7 +181,7 @@ class CheckBoxCustom extends StatefulWidget {
 }
 
 class _CheckBoxCustomState extends State<CheckBoxCustom> {
- late  bool on = false;
+  late bool on = false;
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +206,7 @@ class _CheckBoxCustomState extends State<CheckBoxCustom> {
 
 class ButtonSwitch extends StatefulWidget {
   const ButtonSwitch({super.key, required this.textName});
- final String textName;
+  final String textName;
 
   @override
   State<ButtonSwitch> createState() => _ButtonSwitchState();
@@ -231,10 +234,10 @@ class _ButtonSwitchState extends State<ButtonSwitch> {
     );
   }
 }
-@immutable
 
+@immutable
 class ElevatedButtonCustom extends StatefulWidget {
- final String name;
+  final String name;
 
   const ElevatedButtonCustom({super.key, required this.name});
 
@@ -266,16 +269,18 @@ class _ElevatedButtonCustomState extends State<ElevatedButtonCustom> {
     );
   }
 }
+
 @immutable
 class TextName extends StatelessWidget {
- final String textName;
-final  double fontSize;
- final double textOpacity;
- final Color? colors;
- final double? top;
- final double? left;
+  final String textName;
+  final double fontSize;
+  final double textOpacity;
+  final Color? colors;
+  final double? top;
+  final double? left;
   const TextName(
-      {super.key, required this.textName,
+      {super.key,
+      required this.textName,
       required this.fontSize,
       required this.textOpacity,
       this.top,

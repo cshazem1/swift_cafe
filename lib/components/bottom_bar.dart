@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_nav_bar/google_nav_bar.dart';
-
 import '../screens/home_screen.dart';
-
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
 

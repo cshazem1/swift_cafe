@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 class TextFieldPasswordComponents extends StatefulWidget {
- final String labelText;
-final  String hintText;
+  final String labelText;
+  final String hintText;
   const TextFieldPasswordComponents(
       {super.key, required this.labelText, required this.hintText});
 

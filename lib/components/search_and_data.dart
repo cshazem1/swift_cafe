@@ -25,7 +25,8 @@ class ResearchAndData extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.waving_hand, color: Colors.yellow, size: 30),
+                      const Icon(Icons.waving_hand,
+                          color: Colors.yellow, size: 30),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

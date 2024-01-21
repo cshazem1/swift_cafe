@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:swift_cafe/screens/enter_screen.dart';
+
 void main() => runApp(const MyApp());
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override

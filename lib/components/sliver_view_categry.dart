@@ -4,7 +4,7 @@ import '../models/categry_models.dart';
 import 'categry.dart';
 
 class SliverListCategry extends StatelessWidget {
-  const SliverListCategry({
+   const SliverListCategry({
     super.key,
     required this.list,
   });
@@ -20,7 +20,7 @@ class SliverListCategry extends StatelessWidget {
         return SizedBox(
             height: 280,
             child: Padding(
-              padding: const EdgeInsets.only(top: 10.0),
+              padding:  const EdgeInsets.only(top: 10.0),
               child: Categry(list[index]),
             ));
       },

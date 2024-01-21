@@ -6,7 +6,7 @@ import '../components/sliver_view_categry.dart';
 import '../models/categry_models.dart';
 
 class HomeScreen extends StatelessWidget {
- final List<CategryModels> list = [
+  final List<CategryModels> list = [
     CategryModels(
         image:
             "https://th.bing.com/th/id/R.14a348302bddc6d3afc5b3733f39cddc?rik=PHJttrw%2bI6KCew&pid=ImgRaw&r=0",
@@ -42,8 +42,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController nameController = TextEditingController();
 
-    DateTime now =  DateTime.now();
-    DateTime date =  DateTime(now.year, now.month, now.day);
+    DateTime now = DateTime.now();
+    DateTime date = DateTime(now.year, now.month, now.day);
+    // TODO: implement build
     return Scaffold(
       body: Stack(children: [
         Container(

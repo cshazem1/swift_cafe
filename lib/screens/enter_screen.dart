@@ -50,32 +50,36 @@ class EnterScreen extends StatelessWidget {
               ),
               child: BlocProvider(
                 create: (context) => GetBoolClickSignCubit(),
-                child: BlocBuilder<GetBoolClickSignCubit,
-                    GetBoolClickButtonStates>(
-                  builder: (context, state) {
-                    return ListView(
-                      children: [
-                        state is GetBoolLoginStates
-                            ? const LogInScreen()
-                            : const SignUpScreen(),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        ButtonComponents(
-                            logInButton:
-                                BlocProvider.of<GetBoolClickSignCubit>(context)
-                                    .logInButton,
-                            buttonName: "Log In"),
-                        const SizedBox(height: 10),
-                        ButtonComponents(
-                            logInButton:
-                                !BlocProvider.of<GetBoolClickSignCubit>(context)
-                                    .logInButton,
-                            buttonName: "Sign Up"),
-                      ],
-                    );
-                  },
-                ),
+                child: Builder(builder: (context) {
+                  return BlocBuilder<GetBoolClickSignCubit,
+                      GetBoolClickButtonStates>(
+                    builder: (context, state) {
+                      return ListView(
+                        children: [
+                          state is GetBoolLoginStates
+                              ? const LogInScreen()
+                              : const SignUpScreen(),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          ButtonComponents(
+                              logInButton:
+                                  BlocProvider.of<GetBoolClickSignCubit>(
+                                          context)
+                                      .logInButton,
+                              buttonName: "Log In"),
+                          const SizedBox(height: 10),
+                          ButtonComponents(
+                              logInButton:
+                                  !BlocProvider.of<GetBoolClickSignCubit>(
+                                          context)
+                                      .logInButton,
+                              buttonName: "Sign Up"),
+                        ],
+                      );
+                    },
+                  );
+                }),
               )),
         ),
       ],

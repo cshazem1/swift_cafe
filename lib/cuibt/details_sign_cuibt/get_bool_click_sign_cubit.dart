@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 
 import 'get_bool_click_states.dart';
@@ -9,9 +8,9 @@ class GetBoolClickSignCubit extends Cubit<GetBoolClickButtonStates> {
   bool signup = false;
   bool logInButton = true;
 
-  getBool(bool logInButton) {
+  getBool(bool button) {
     logInButton =
-        logInButton ? logInButton == logInButton : logInButton = !logInButton;
+        button ? logInButton == logInButton : logInButton = !logInButton;
 
     logInButton ? emit(GetBoolLoginStates()) : emit(GetBoolSignUpStates());
     return logInButton;

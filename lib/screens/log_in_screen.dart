@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../components/text_field_components.dart';
 import '../components/text_field_password_components.dart';
 import '../cuibt/details_sign_cuibt/get_bool_click_sign_cubit.dart';
+
 class LogInScreen extends StatelessWidget {
   const LogInScreen({
     super.key,

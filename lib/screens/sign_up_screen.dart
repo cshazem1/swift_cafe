@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../components/text_field_components.dart';
 import '../components/text_field_password_components.dart';
 import '../cuibt/details_sign_cuibt/get_bool_click_sign_cubit.dart';
+
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({
     super.key,
@@ -62,11 +63,13 @@ class SignUpScreen extends StatelessWidget {
           const SizedBox(
             height: 27,
           ),
-          const TextFieldComponent(labelText: "Name", hintText: "Enter your Name"),
+          const TextFieldComponent(
+              labelText: "Name", hintText: "Enter your Name"),
           const SizedBox(
             height: 5,
           ),
-          const TextFieldComponent(labelText: "Email", hintText: "Enter your Email"),
+          const TextFieldComponent(
+              labelText: "Email", hintText: "Enter your Email"),
           const SizedBox(
             height: 5,
           ),
@@ -83,8 +86,8 @@ class SignUpScreen extends StatelessWidget {
   }
 
   void signInConditionShow(BuildContext context) {
-    if (!BlocProvider.of<GetBoolClickSignCubit>(context).signup &
-        !BlocProvider.of<GetBoolClickSignCubit>(context).login) {
+    if (BlocProvider.of<GetBoolClickSignCubit>(context).logInButton &
+        BlocProvider.of<GetBoolClickSignCubit>(context).login) {
       BlocProvider.of<GetBoolClickSignCubit>(context).login = false;
 
       BlocProvider.of<GetBoolClickSignCubit>(context).signup = false;

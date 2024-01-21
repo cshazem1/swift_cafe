@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 class TextFieldComponent extends StatelessWidget {
+  final String hintText;
+  final String labelText;
 
- final String hintText;
- final String labelText;
-
-  const TextFieldComponent({super.key, required this.hintText, required this.labelText});
+  const TextFieldComponent(
+      {super.key, required this.hintText, required this.labelText});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,8 @@ class TextFieldComponent extends StatelessWidget {
         decoration: InputDecoration(
             hintText: hintText,
             contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-            label: Text(labelText, style: (const TextStyle(color: Colors.white))),
+            label:
+                Text(labelText, style: (const TextStyle(color: Colors.white))),
             enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.orange))),
       ),

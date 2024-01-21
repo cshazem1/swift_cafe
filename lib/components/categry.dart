@@ -4,8 +4,7 @@ import 'package:swift_cafe/models/categry_models.dart';
 import '../screens/select_item_screen.dart';
 class Categry extends StatelessWidget {
  final CategryModels categryModels;
-  const Categry(this.categryModels, {super.key});
-
+   const Categry(this.categryModels, {super.key});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -17,17 +16,17 @@ class Categry extends StatelessWidget {
         ));
       },
       child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          margin:  const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           width: 250,
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderRadius:  const BorderRadius.all(Radius.circular(10)),
             color: Colors.white60.withOpacity(.3),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.6),
                 spreadRadius: 3,
                 blurRadius: 5,
-                offset: const Offset(1, 3), // changes position of shadow
+                offset:  const Offset(1, 3), // changes position of shadow
               ),
             ],
           ),
@@ -41,7 +40,8 @@ class Categry extends StatelessWidget {
                   height: 150,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(categryModels.image),
+                        image:
+                        NetworkImage(categryModels.image),
                         fit: BoxFit.fill),
                   ),
                 ),
@@ -51,7 +51,7 @@ class Categry extends StatelessWidget {
                 left: 30,
                 child: Text(
                   categryModels.name,
-                  style: const TextStyle(
+                  style:  const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -65,7 +65,7 @@ class Categry extends StatelessWidget {
                   width: 140,
                   child: Text(
                     categryModels.desc,
-                    style: const TextStyle(color: Colors.black, fontSize: 15),
+                    style:  const TextStyle(color: Colors.black, fontSize: 15),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -76,7 +76,7 @@ class Categry extends StatelessWidget {
                 left: 30,
                 child: Text(
                   categryModels.rate.toString(),
-                  style: const TextStyle(color: Colors.black, fontSize: 15),
+                  style:  const TextStyle(color: Colors.black, fontSize: 15),
                 ),
               ),
               Positioned(
@@ -86,7 +86,7 @@ class Categry extends StatelessWidget {
                     width: 50,
                     height: 50,
                     color: Colors.green,
-                    child: const Icon(Icons.add, color: Colors.white),
+                    child:  const Icon(Icons.add, color: Colors.white),
                   )),
             ],
           )),

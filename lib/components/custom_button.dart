@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cuibt/details_sign_cuibt/get_bool_click_sign_cubit.dart';
@@ -17,16 +19,21 @@ class ButtonComponents extends StatelessWidget {
         BlocProvider.of<GetBoolClickSignCubit>(context).signup;
     // TODO: implement build
     return Row(
+
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
           width: 200,
           child: ElevatedButton(
             onPressed: () {
+              log("-${ BlocProvider.of<GetBoolClickSignCubit>(context).logInButton} ${ BlocProvider.of<GetBoolClickSignCubit>(context).login}  ${ BlocProvider.of<GetBoolClickSignCubit>(context).signup} ");
+
               logInButton = BlocProvider.of<GetBoolClickSignCubit>(context)
                   .getBool(logInButton);
 
+
               if (logInButton && selectEnterLogin && !selectEnterSignIn) {
+
                 Navigator.pop(context);
 
                 Navigator.push(context, MaterialPageRoute(
@@ -34,12 +41,12 @@ class ButtonComponents extends StatelessWidget {
                     return const BottomBar();
                   },
                 ));
-              } else if (!logInButton &&
+              } else if (logInButton &&
                   selectEnterLogin &&
                   selectEnterSignIn) {
                 BlocProvider.of<GetBoolClickSignCubit>(context)
-                    .getBool(false);
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    .getBool(true);
+                ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
                   content: Text("the registration is done"),
                 ));
               }
@@ -53,7 +60,7 @@ class ButtonComponents extends StatelessWidget {
                     foregroundColor: Colors.blue),
             child: Text(
               buttonName,
-              style: const TextStyle(color: Colors.white),
+              style:  const TextStyle(color: Colors.white),
             ),
           ),
         ),
