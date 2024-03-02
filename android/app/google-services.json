@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "963422119423",
+    "project_id": "swift-cafe-3e7c2",
+    "storage_bucket": "swift-cafe-3e7c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963422119423:android:1b2301f16ef26dfa02f3ca",
+        "android_client_info": {
+          "package_name": "com.example.swift_cafe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLlqeEVYFYA0KdB1AXTqEN8oZQEEp8nhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
