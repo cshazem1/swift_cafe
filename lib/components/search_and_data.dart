@@ -80,7 +80,7 @@ class ResearchAndData extends StatelessWidget {
                                   image: const DecorationImage(
                                       fit: BoxFit.fill,
                                       image: NetworkImage(
-                                          "https://scontent.fcai19-8.fna.fbcdn.net/v/t39.30808-6/357681465_3138343516464852_1124048481726826689_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9c7eae&_nc_eui2=AeHa8VxKe7D0Z95jIJOh_l0_AI650qRYawwAjrnSpFhrDMMyfWSrs1Pja6l1Ecu2Wr8Zg6105twJccRXer3qx66l&_nc_ohc=NBkFNsQ3lCUAX_Myjo3&_nc_ht=scontent.fcai19-8.fna&oh=00_AfCvhDn9Z6_5J-2NH601Gi7Z2AQ4BVWBqfOW3AdW6cJgRA&oe=65B18DD4")))),
+                                          "https://cdn.wallpapersafari.com/95/85/eV9PRm.jpg")))),
                         ),
                       ),
                     ],
