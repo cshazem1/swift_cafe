@@ -6,7 +6,6 @@ import 'package:swift_cafe/components/background.dart';
 import 'package:swift_cafe/components/custom_info_user_sign_up.dart';
 import 'package:swift_cafe/cubits/firebase_sign_up_cubit/firebase_sign_up_cubit.dart';
 
-import '../cubits/categry_image_cuibt/get_location_image_cubit.dart';
 
 
 class SignUpScreen extends StatelessWidget {

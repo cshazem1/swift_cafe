@@ -4,8 +4,9 @@ class TextFieldPasswordComponents extends StatefulWidget {
   final String labelText;
   final String hintText;
   final Function(String) onChange;
+  final bool enable;
   const TextFieldPasswordComponents(
-      {super.key, required this.labelText, required this.hintText,required this.onChange});
+      {super.key, required this.labelText, required this.hintText,required this.onChange, required this.enable});
 
   @override
   State<TextFieldPasswordComponents> createState() =>
@@ -22,6 +23,7 @@ class _TextFieldPasswordComponentsState
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: TextFormField(
+        enabled:widget.enable ,
         onChanged: widget.onChange,
         validator: (value) {
           if(value!.isEmpty) {

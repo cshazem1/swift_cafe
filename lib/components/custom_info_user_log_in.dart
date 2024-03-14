@@ -4,7 +4,6 @@ import 'package:swift_cafe/components/text_field_components.dart';
 import 'package:swift_cafe/components/text_field_password_components.dart';
 import 'package:swift_cafe/screens/home_screen.dart';
 import 'package:swift_cafe/screens/sign_up_screen.dart';
-
 import '../cubits/firebase_log_in_cubit/firebase_log_in_cubit.dart';
 import '../cubits/firebase_log_in_cubit/firebase_log_in_state.dart';
 import '../helper/show_snack_bar.dart';
@@ -98,6 +97,7 @@ class _CustomInfoUserLogInState extends State<CustomInfoUserLogIn> {
                   height: 5,
                 ),
                 TextFieldPasswordComponents(
+                  enable: isLoading,
                     onChange: (p0) {
                       password = p0;
                     },
@@ -110,37 +110,57 @@ class _CustomInfoUserLogInState extends State<CustomInfoUserLogIn> {
         const SizedBox(
           height: 30,
         ),
-        BlocBuilder<FirebaseLogInCubit, FirebaseLogInState>(
-          builder: (context, state) {
-            if (state is FirebaseLogInInitial) {
-              return CustomButton(
-                  onPress: () async {
-                    validate();
-                    //  await      FireBase().signIn(email: email!, password: password!);
+        Builder(
+          builder: (context) {
+            return BlocConsumer<FirebaseLogInCubit,FirebaseLogInState>(          builder: (context, state) {
+              if (state is FirebaseLogInInitial) {
+                return CustomButton(
+                    onPress: () async {
+                      validate();
+                      //  await      FireBase().signIn(email: email!, password: password!);
+                    },
+                    logInButton: true,
+                    buttonName: "Log In=>");
+              } else if (state is FirebaseLogInLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is FirebaseLogInSuccess) {
+                WidgetsBinding.instance.addPostFrameCallback(
+                      (timeStamp) {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, HomeScreen.id);
                   },
-                  logInButton: true,
-                  buttonName: "Log In=>");
-            } else if (state is FirebaseLogInLoading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is FirebaseLogInSuccess) {
-              WidgetsBinding.instance.addPostFrameCallback(
-                (timeStamp) {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, HomeScreen.id);
-                },
-              );
-            } else if (state is FirebaseLogInFailure) {
-              WidgetsBinding.instance.addPostFrameCallback((_) => showToast(
-                  context,
-                  state.message.contains("network error")
-                      ? "Network Error"
-                      : state.message.contains("incorrect")
-                          ? "incorrect"
-                          : state.message));
+                );
+              } else if (state is FirebaseLogInFailure) {
 
-            }
-            return const SizedBox();
-          },
+                WidgetsBinding.instance.addPostFrameCallback((_) => showToast(
+                    context,
+                    state.message.contains("network error")
+                        ? "Network Error"
+                        : state.message.contains("incorrect")
+                        ? "incorrect"
+                        : state.message));
+                return CustomButton(
+                    onPress: () async {
+                      validate();
+                      //  await      FireBase().signIn(email: email!, password: password!);
+                    },
+                    logInButton: true,
+                    buttonName: "Log In=>");
+
+              }
+              return const SizedBox();
+            },
+                listener: (context, state) {
+                  if (state is FirebaseLogInLoading) {
+                    isLoading = false;
+                    setState(() {});
+                  } else if (state is FirebaseLogInFailure) {
+                    isLoading = true;
+                    setState(() {});
+                  }
+                },
+            );
+          }
         ),
         const SizedBox(height: 10),
         CustomButton(

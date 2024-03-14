@@ -1,7 +1,7 @@
 class FirebaseSignUpState {}
-class FirebaseLSignUpInitial extends FirebaseSignUpState {}
+class FirebaseSignUpInitial extends FirebaseSignUpState {}
 
-class FirebaseLSignUpLoading extends FirebaseSignUpState {}
+class FirebaseSignUpLoading extends FirebaseSignUpState {}
 
 class FirebaseSignUpSuccess extends FirebaseSignUpState {}
 

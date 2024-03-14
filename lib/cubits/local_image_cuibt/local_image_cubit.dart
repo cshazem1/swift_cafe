@@ -8,11 +8,11 @@ import 'package:flutter/foundation.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
 
-import 'get_location_image_states.dart';
+import 'local_image_states.dart';
 
-class GetLocationImageCubit extends Cubit<LocationImageStated> {
+class LocalImageCubit extends Cubit<LocationImageStated> {
   XFile? xFile;
-  GetLocationImageCubit() : super(InitialLocationImageState());
+  LocalImageCubit() : super(InitialLocationImageState());
 
   String? locationImage;
 

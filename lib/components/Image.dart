@@ -6,8 +6,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:swift_cafe/cubits/local_image_cuibt/local_image_cubit.dart';
 
-import '../cubits/categry_image_cuibt/get_location_image_cubit.dart';
 
 // ignore: must_be_immutable
 class ImageU extends StatefulWidget {
@@ -110,7 +110,7 @@ class _ImageUState extends State<ImageU> {
     setState(
       () {
 
-        BlocProvider.of<GetLocationImageCubit>(context)
+        BlocProvider.of<LocalImageCubit>(context)
             .getImageUpload(xFilePicked!);
         galleryFile = File(pickedFile!.path);
       },
