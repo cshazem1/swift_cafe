@@ -1,15 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swift_cafe/cubits/user_data_cubit/user_data_cubite.dart';
 import 'package:swift_cafe/models/user_model.dart';
 
-import '../firebase/cloud_storage/add_user.dart';
+import '../firebase/cloud_storage/users.dart';
 
 class ResearchAndData extends StatefulWidget {
-   ResearchAndData({
+   const ResearchAndData({
     super.key,
     required this.date,
-    required this.nameController,
+    required this.nameController, required this.email,
   });
 
+   final String email;
   final DateTime date;
   final TextEditingController nameController;
 
@@ -19,20 +24,25 @@ class ResearchAndData extends StatefulWidget {
 
 class _ResearchAndDataState extends State<ResearchAndData> {
   var future;
-
+  UserModel? userModel;
   @override
   void initState()  {
-    future=  AddUser().searchUsersAndEmail();
+
+    future=  Users().searchUsersAndEmail(widget.email);
     super.initState();
 
   }
 
   @override
   Widget build(BuildContext context) {
+
     return FutureBuilder<dynamic>(
       builder:(context, snapshot) {
         if(snapshot.hasData){
-          UserModel userModel=snapshot.data;
+           userModel=snapshot.data;
+           log(userModel!.id);
+BlocProvider.of<UserDataCubit>(context).userData(userModel!);
+
         return  SizedBox(
             height: 250,
             child: Container(
@@ -63,7 +73,8 @@ class _ResearchAndDataState extends State<ResearchAndData> {
                                 ),
                                  Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
-                                  child: Text(userModel.name,
+                                  child: Text(userModel!.name,
+
                                       style: const TextStyle(
                                           fontSize: 18, color: Colors.white)),
                                 )

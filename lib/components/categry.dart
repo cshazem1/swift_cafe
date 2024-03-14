@@ -11,6 +11,9 @@ class Categry extends StatelessWidget {
       onTap: () {
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
+            choiceFilling="";
+            choiceSugar="";
+            choiceMilk="";
             return SelectItemScreen(categryModels);
           },
         ));
@@ -75,7 +78,7 @@ class Categry extends StatelessWidget {
                 top: 240,
                 left: 30,
                 child: Text(
-                  categryModels.rate.toString(),
+                  categryModels.salary.toString(),
                   style:  const TextStyle(color: Colors.black, fontSize: 15),
                 ),
               ),

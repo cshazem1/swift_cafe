@@ -1,9 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swift_cafe/components/text_field_components.dart';
 import 'package:swift_cafe/components/text_field_password_components.dart';
 import 'package:swift_cafe/cubits/firebase_sign_up_cubit/firebase_sign_up_cubit.dart';
-import 'package:swift_cafe/firebase/cloud_storage/add_user.dart';
+import 'package:swift_cafe/firebase/cloud_storage/users.dart';
 
 import '../cubits/firebase_sign_up_cubit/firebase_sign_up_state.dart';
 import '../helper/show_snack_bar.dart';
@@ -131,7 +133,7 @@ class _CustomInfoUserSignUpState extends State<CustomInfoUserSignUp> {
                 if (state is FirebaseSignUpInitial) {
                   return CustomButton(
                       onPress: () async {
-                        validate();
+                        await validate();
                         //  await      FireBase().signIn(email: email!, password: password!);
                       },
                       logInButton: true,
@@ -141,9 +143,13 @@ class _CustomInfoUserSignUpState extends State<CustomInfoUserSignUp> {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is FirebaseSignUpSuccess) {
                   WidgetsBinding.instance.addPostFrameCallback(
-                    (timeStamp) {
+                    (timeStamp) async {
+                      await Users.addUser(name: name!, email: email!);
+
                       Navigator.pop(context);
-                      Navigator.pushNamed(context, HomeScreen.id);
+
+                      Navigator.pushNamed(context, HomeScreen.id,
+                          arguments: email);
                     },
                   );
                 } else if (state is FirebaseSignUpFailure) {
@@ -186,7 +192,6 @@ class _CustomInfoUserSignUpState extends State<CustomInfoUserSignUp> {
       if (pass == confPass) {
         await BlocProvider.of<FirebaseSignUpCubit>(context)
             .register(email: email!, password: pass!);
-        await AddUser.addUser(name: name!, email: email!);
       } else {
         showToast(context,
             "The confirmation password and the password are not the same");

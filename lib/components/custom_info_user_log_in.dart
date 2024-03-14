@@ -97,7 +97,7 @@ class _CustomInfoUserLogInState extends State<CustomInfoUserLogIn> {
                   height: 5,
                 ),
                 TextFieldPasswordComponents(
-                  enable: isLoading,
+                    enable: isLoading,
                     onChange: (p0) {
                       password = p0;
                     },
@@ -110,9 +110,9 @@ class _CustomInfoUserLogInState extends State<CustomInfoUserLogIn> {
         const SizedBox(
           height: 30,
         ),
-        Builder(
-          builder: (context) {
-            return BlocConsumer<FirebaseLogInCubit,FirebaseLogInState>(          builder: (context, state) {
+        Builder(builder: (context) {
+          return BlocConsumer<FirebaseLogInCubit, FirebaseLogInState>(
+            builder: (context, state) {
               if (state is FirebaseLogInInitial) {
                 return CustomButton(
                     onPress: () async {
@@ -125,20 +125,19 @@ class _CustomInfoUserLogInState extends State<CustomInfoUserLogIn> {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is FirebaseLogInSuccess) {
                 WidgetsBinding.instance.addPostFrameCallback(
-                      (timeStamp) {
+                  (timeStamp) {
                     Navigator.pop(context);
-                    Navigator.pushNamed(context, HomeScreen.id);
+                    Navigator.pushNamed(context, HomeScreen.id,arguments: email);
                   },
                 );
               } else if (state is FirebaseLogInFailure) {
-
                 WidgetsBinding.instance.addPostFrameCallback((_) => showToast(
                     context,
                     state.message.contains("network error")
                         ? "Network Error"
                         : state.message.contains("incorrect")
-                        ? "incorrect"
-                        : state.message));
+                            ? "incorrect"
+                            : state.message));
                 return CustomButton(
                     onPress: () async {
                       validate();
@@ -146,26 +145,25 @@ class _CustomInfoUserLogInState extends State<CustomInfoUserLogIn> {
                     },
                     logInButton: true,
                     buttonName: "Log In=>");
-
               }
               return const SizedBox();
             },
-                listener: (context, state) {
-                  if (state is FirebaseLogInLoading) {
-                    isLoading = false;
-                    setState(() {});
-                  } else if (state is FirebaseLogInFailure) {
-                    isLoading = true;
-                    setState(() {});
-                  }
-                },
-            );
-          }
-        ),
+            listener: (context, state) {
+              if (state is FirebaseLogInLoading) {
+                isLoading = false;
+                setState(() {});
+              } else if (state is FirebaseLogInFailure) {
+                isLoading = true;
+                setState(() {});
+              }
+            },
+          );
+        }),
         const SizedBox(height: 10),
         CustomButton(
             onPress: () {
               Navigator.pushNamed(context, SignUpScreen.id);
+
             },
             logInButton: false,
             buttonName: "Sign Up"),

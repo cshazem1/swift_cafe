@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swift_cafe/components/background.dart';
@@ -141,7 +140,7 @@ class _AdminScreenState extends State<AdminScreen> {
       image = BlocProvider.of<LocalImageCubit>(context).locationImage;
       isLoading = false;
       setState(() {});
-      await AddCategry.addCategry(
+      await Categry.addCategry(
           name: name!, desc: desc!, image: image!, salary: salary!);
     } else {
       autoValidateMode = AutovalidateMode.always;
