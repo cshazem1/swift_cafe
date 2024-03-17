@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:swift_cafe/cubits/local_image_cuibt/local_image_cubit.dart';
 import 'package:swift_cafe/cubits/my_id_cubit/get_id_cubit.dart';
 import 'package:swift_cafe/cubits/shopping_basket_cubit/shopping_basket_cubit.dart';
@@ -9,6 +10,7 @@ import 'package:swift_cafe/screens/log_in_screen.dart';
 import 'package:swift_cafe/screens/shopping_basket_screen.dart';
 import 'package:swift_cafe/screens/sign_up_screen.dart';
 import 'package:swift_cafe/simple_bloc_observer.dart';
+import 'constants.dart';
 import 'cubits/firebase_log_in_cubit/firebase_log_in_cubit.dart';
 import 'firebase_options.dart';
 
@@ -16,9 +18,13 @@ void main() async {
   Bloc.observer = SimpleBlocObserver();
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Future.wait([
+    Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    ),
+    Hive.initFlutter()
+  ]);
+await Hive.openBox(kOrderBox);
   runApp(const MyApp());
 }
 
