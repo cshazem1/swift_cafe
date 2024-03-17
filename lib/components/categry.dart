@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swift_cafe/public.dart';
 import 'package:swift_cafe/models/categry_models.dart';
 
 import '../screens/select_item_screen.dart';
@@ -42,6 +43,16 @@ class Categry extends StatelessWidget {
                   width: 150,
                   height: 150,
                   decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.blue.withOpacity(.2),
+                        spreadRadius: 1,
+                        blurRadius: 400,
+                        offset: const Offset(0, 60), // changes position of shadow
+                      ),
+                    ],
+
                     image: DecorationImage(
                         image:
                         NetworkImage(categryModels.image),

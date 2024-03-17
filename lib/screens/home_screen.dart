@@ -11,7 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = "home";
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -63,7 +63,7 @@ String? id;
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
-                            return AdminScreen();
+                            return const AdminScreen();
                           },
                         ));
                       },
@@ -79,7 +79,7 @@ String? id;
               );
             }
 
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           },
         )
       ]));

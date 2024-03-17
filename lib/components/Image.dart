@@ -1,13 +1,11 @@
 // ignore_for_file: file_names
 
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:swift_cafe/cubits/local_image_cuibt/local_image_cubit.dart';
-
 
 // ignore: must_be_immutable
 class ImageU extends StatefulWidget {
@@ -30,22 +28,32 @@ class _ImageUState extends State<ImageU> {
       children: [
         Stack(children: [
           Container(
-            width: 210,
-            height: 210,
+            width: 215,
+            height: 215,
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.5),
-                spreadRadius: 15,
-                blurRadius: 15,
-                offset: const Offset(0, 4), // changes position of shadow
+                color: Colors.black.withOpacity(0.7),
+                spreadRadius: 20,
+                blurRadius: 18,
+                offset: const Offset(0, 15), // changes position of shadow
               ),
-            ], color: Colors.white, borderRadius: BorderRadius.circular(200)),
+            ], color: Colors.black, borderRadius: BorderRadius.circular(200)),
             child: galleryFile == null
                 ? Center(
                     child: Container(
+
                       decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.white.withOpacity(.8),
+                              spreadRadius: 10,
+                              blurRadius: 20,
+                              offset: const Offset(0, 0), // changes position of shadow
+                            ),
+                          ],
+
                           image: const DecorationImage(
-                              image: AssetImage("image/not_found_user.jpg"),
+                              image: AssetImage("image/add_item.webp"),
                               fit: BoxFit.fill),
                           borderRadius: BorderRadius.circular(200)),
                       width: 200,
@@ -55,7 +63,17 @@ class _ImageUState extends State<ImageU> {
                 : Center(
                     child: Container(
                       decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.white.withOpacity(.8),
+                              spreadRadius: 10,
+                              blurRadius: 20,
+                              offset: const Offset(0, 0), // changes position of shadow
+                            ),
+                          ],
+
                           image: DecorationImage(
+
                               image: FileImage(galleryFile!), fit: BoxFit.fill),
                           borderRadius: BorderRadius.circular(200)),
                       width: 200,
@@ -64,11 +82,11 @@ class _ImageUState extends State<ImageU> {
                   ),
           ),
           Positioned(
-              right: 60,
-              bottom: 7,
+              right: 70,
+              bottom: 15,
               child: SizedBox(
-                width: 90,
-                height: 55,
+                width: 75,
+                height: 45,
                 child: widget.onClick
                     ? ElevatedButton(
                         style: ButtonStyle(
@@ -77,9 +95,11 @@ class _ImageUState extends State<ImageU> {
                             (Set<MaterialState> states) {
                               if (!states.contains(MaterialState.pressed)) {
                                 return Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(.5);
+                                    .primaryColor;
+                              }
+                             else if (states.contains(MaterialState.pressed)) {
+                                return Theme.of(context)
+                                    .hintColor;
                               }
                               return null; // Use the component's default.
                             },
@@ -109,9 +129,7 @@ class _ImageUState extends State<ImageU> {
 
     setState(
       () {
-
-        BlocProvider.of<LocalImageCubit>(context)
-            .getImageUpload(xFilePicked!);
+        BlocProvider.of<LocalImageCubit>(context).getImageUpload(xFilePicked!);
         galleryFile = File(pickedFile!.path);
       },
     );

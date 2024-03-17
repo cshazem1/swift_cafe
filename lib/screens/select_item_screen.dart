@@ -1,19 +1,22 @@
-import 'dart:developer';
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:swift_cafe/cubits/user_data_cubit/user_data_cubite.dart';
-import 'package:swift_cafe/cubits/user_data_cubit/user_data_state.dart';
+
 import 'package:swift_cafe/models/categry_models.dart';
 import 'package:swift_cafe/models/user_model.dart';
 
+import '../components/button_switch.dart';
+import '../components/custom_check_box.dart';
+import '../components/custom_elevated_button.dart';
+import '../components/custom_text_name.dart';
+import '../cubits/my_id_cubit/get_id_cubit.dart';
+import '../cubits/my_id_cubit/get_id_state.dart';
+import '../helper/show_snack_bar.dart';
+import '../public.dart';
 import '../firebase/cloud_storage/order.dart';
 
-String choiceFilling = "";
-String choiceMilk = "";
-String choiceSugar = "";
+
 
 @immutable
 class SelectItemScreen extends StatefulWidget {
@@ -63,10 +66,10 @@ class _SelectItemScreenState extends State<SelectItemScreen> {
 
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("1"), value: "1"),
-      DropdownMenuItem(child: Text("2"), value: "2"),
-      DropdownMenuItem(child: Text("3"), value: "3"),
-      DropdownMenuItem(child: Text("4"), value: "4"),
+      const DropdownMenuItem(value: "1", child: Text("1")),
+      const DropdownMenuItem(value: "2", child: Text("2")),
+      const DropdownMenuItem(value: "3", child: Text("3")),
+      const DropdownMenuItem(value: "4", child: Text("4")),
     ];
     return menuItems;
   }
@@ -76,14 +79,11 @@ class _SelectItemScreenState extends State<SelectItemScreen> {
   UserModel? userModel;
   @override
   Widget build(BuildContext context) {
+    String date =
+        "${DateTime.now().year.toString()}/${DateTime.now().month.toString()}/${DateTime.now().day.toString()}/${DateTime.now().hour.toString()}:${DateTime.now().minute.toString()}";
     totalSalary = double.parse(widget.categryModels.salary);
     double dValue = double.parse(value);
     totalSalary = totalSalary! * dValue;
-
-    print(choiceSugar);
-    print(choiceFilling);
-    print(value);
-
     return Scaffold(
       body: Stack(children: [
         Container(
@@ -133,9 +133,11 @@ class _SelectItemScreenState extends State<SelectItemScreen> {
                       padding: const EdgeInsets.only(right: 40.0),
                       child: DropdownButton(
                         autofocus: true,
-                        style: TextStyle(color: Colors.white, fontSize: 25),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 25),
                         dropdownColor: Colors.grey,
-                        iconEnabledColor: Colors.grey,
+                        iconEnabledColor: Colors.black,
+
                         value: value,
                         items: dropdownItems,
                         onChanged: (String? x) {
@@ -167,7 +169,7 @@ class _SelectItemScreenState extends State<SelectItemScreen> {
                 Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.only(left: 10),
                       child: ElevatedButtonCustom(
                         name: "Full",
                         num: 1,
@@ -297,15 +299,18 @@ class _SelectItemScreenState extends State<SelectItemScreen> {
                             textName: "High Priority☻",
                             fontSize: 13,
                             textOpacity: 1),
-                        BlocListener<UserDataCubit, UserDataState>(
+                        BlocListener<GetIdCubit, GetIdState>(
                           listener: (context, state) {
-                            if (state is UserDataSuccess) {
-                              log("wow");
-                            }
+                            if (state is GetIdSuccess) {
+                              print("object");
+                              WidgetsBinding.instance.addPostFrameCallback((_) {   showToast(context,"Success");
+
+                            });}
                           },
                           child: ElevatedButton(
                             onPressed: () async {
                               await Order.addOrder(
+                                  data: date,
                                   name: widget.categryModels.name,
                                   image: widget.categryModels.image,
                                   salary: widget.categryModels.salary,
@@ -313,13 +318,14 @@ class _SelectItemScreenState extends State<SelectItemScreen> {
                                   milk: choiceMilk,
                                   sugar: choiceSugar,
                                   number: value,
-                                  id: BlocProvider.of<UserDataCubit>(context)
-                                      .userModel!
-                                      .id);
+                                  id: BlocProvider.of<GetIdCubit>(context).id!);
+    WidgetsBinding.instance.addPostFrameCallback((_) {   showToast(context,"Success");
+    Navigator.pop(context);
+
+    });}
                               // ignore: use_build_context_synchronously
-                              Navigator.pop(context);
-                            },
-                            style: ElevatedButton.styleFrom(
+
+,                            style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.green),
                             child: const TextName(
                               textName: "Submit ",
@@ -350,136 +356,8 @@ class _SelectItemScreenState extends State<SelectItemScreen> {
   }
 }
 
-@immutable
-class CheckBoxCustom extends StatefulWidget {
-  const CheckBoxCustom({
-    super.key,
-  });
 
-  @override
-  State<CheckBoxCustom> createState() => _CheckBoxCustomState();
-}
 
-class _CheckBoxCustomState extends State<CheckBoxCustom> {
-  late bool on = false;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 25,
-      width: 25,
-      color: Colors.white,
-      child: Checkbox(
-        checkColor: Colors.yellowAccent,
-        activeColor: Colors.orange,
-        hoverColor: Colors.lightGreen,
-        value: on,
-        onChanged: (value) {
-          return setState(() {
-            on = value!;
-          });
-        },
-      ),
-    );
-  }
-}
 
-class ButtonSwitch extends StatefulWidget {
- final int num;
- final Function(bool) click;
-  const ButtonSwitch(
-      {super.key,
-      required this.textName,
-      required this.num,
-      required this.click});
-  final String textName;
 
-  @override
-  State<ButtonSwitch> createState() => _ButtonSwitchState();
-}
-
-class _ButtonSwitchState extends State<ButtonSwitch> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 25.0, top: 10),
-      child: Row(
-        children: [
-          CupertinoSwitch(
-            value:
-                choiceMilk == widget.textName || choiceSugar == widget.textName,
-            onChanged: widget.click,
-          ),
-          TextName(textName: widget.textName, fontSize: 13, textOpacity: .8)
-        ],
-      ),
-    );
-  }
-}
-
-@immutable
-class ElevatedButtonCustom extends StatefulWidget {
-  final String name;
- final int num;
-  final VoidCallback click;
-
-  const ElevatedButtonCustom(
-      {super.key, required this.name, required this.num, required this.click});
-
-  @override
-  State<ElevatedButtonCustom> createState() => _ElevatedButtonCustomState();
-}
-
-class _ElevatedButtonCustomState extends State<ElevatedButtonCustom> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0, top: 10),
-      child: ElevatedButton(
-        onPressed: widget.click,
-        style: ElevatedButton.styleFrom(
-            fixedSize: const Size(80, 30),
-            backgroundColor:
-                choiceFilling == widget.name ? Colors.green : Colors.white),
-        child: TextName(
-            textOpacity: .8,
-            fontSize: 15,
-            textName: widget.name,
-            colors:  choiceFilling == widget.name ? Colors.white : Colors.black),
-      ),
-    );
-  }
-}
-
-@immutable
-class TextName extends StatelessWidget {
-  final String textName;
-  final double fontSize;
-  final double textOpacity;
-  final Color? colors;
-  final double? top;
-  final double? left;
-  const TextName(
-      {super.key,
-      required this.textName,
-      required this.fontSize,
-      required this.textOpacity,
-      this.top,
-      this.left,
-      this.colors});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: top ?? 0, left: left ?? 0),
-      child: Text(
-        textName,
-        style: TextStyle(
-            fontSize: fontSize,
-            fontFamily: "YesevaOne",
-            color: colors?.withOpacity(textOpacity) ??
-                Colors.white.withOpacity(textOpacity)),
-      ),
-    );
-  }
-}

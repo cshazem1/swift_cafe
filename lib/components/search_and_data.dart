@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:swift_cafe/cubits/user_data_cubit/user_data_cubite.dart';
+import 'package:swift_cafe/cubits/my_id_cubit/get_id_cubit.dart';
 import 'package:swift_cafe/models/user_model.dart';
 
 import '../firebase/cloud_storage/users.dart';
@@ -41,7 +41,7 @@ class _ResearchAndDataState extends State<ResearchAndData> {
         if(snapshot.hasData){
            userModel=snapshot.data;
            log(userModel!.id);
-BlocProvider.of<UserDataCubit>(context).userData(userModel!);
+BlocProvider.of<GetIdCubit>(context).getId(userModel!.id);
 
         return  SizedBox(
             height: 250,

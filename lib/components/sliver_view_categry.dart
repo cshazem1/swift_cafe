@@ -21,7 +21,7 @@ class SliverListCategry extends StatelessWidget {
             height: 280,
             child: Padding(
               padding:  const EdgeInsets.only(top: 10.0),
-              child: Categry(list[index]),
+              child: Categry(list[list.length-1-index]),
             ));
       },
     ));

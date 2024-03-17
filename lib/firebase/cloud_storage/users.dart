@@ -29,14 +29,12 @@ class Users {
       // Step 2: Retrieve User Emails
       UserModel? userModel;
       for (QueryDocumentSnapshot doc in querySnapshot.docs) {
-        print(doc.get('name'));
         userModel = UserModel(
             name: doc.get('name'), email: doc.get('email'), id: doc.get('id'));
       }
 
       return userModel!;
     } catch (e) {
-      print('Error searching users: $e');
       return UserModel(
           name: "",
           email: "",

@@ -127,7 +127,8 @@ class _CustomInfoUserLogInState extends State<CustomInfoUserLogIn> {
                 WidgetsBinding.instance.addPostFrameCallback(
                   (timeStamp) {
                     Navigator.pop(context);
-                    Navigator.pushNamed(context, HomeScreen.id,arguments: email);
+                    Navigator.pushNamed(context, HomeScreen.id,
+                        arguments: email);
                   },
                 );
               } else if (state is FirebaseLogInFailure) {
@@ -163,7 +164,6 @@ class _CustomInfoUserLogInState extends State<CustomInfoUserLogIn> {
         CustomButton(
             onPress: () {
               Navigator.pushNamed(context, SignUpScreen.id);
-
             },
             logInButton: false,
             buttonName: "Sign Up"),

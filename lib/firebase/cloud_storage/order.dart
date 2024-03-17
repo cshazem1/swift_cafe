@@ -11,7 +11,7 @@ class Order {
       required String milk,
       required String sugar,
       required String number,
-      required String id}) async {
+      required String id,required String data}) async {
     CollectionReference order = FirebaseFirestore.instance
         .collection('users')
         .doc(id)
@@ -26,7 +26,8 @@ class Order {
       'salary': salary,
       'milk': milk,
       'sugar': sugar,
-      'number': number
+      'number': number,
+      'data':data
       // 42
     }).then((DocumentReference docRef) {
       docRef.update({"id": docRef.id});
