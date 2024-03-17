@@ -1,9 +1,9 @@
-class CategryModels {
-  String name;
-  String desc;
-  String rate;
-  String image;
-  String salary;
+class CategryModels  {
+ final String name;
+ final String desc;
+ final String rate;
+ final String image;
+ final String salary;
 
   CategryModels(
       {

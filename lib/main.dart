@@ -6,6 +6,7 @@ import 'package:swift_cafe/cubits/my_id_cubit/get_id_cubit.dart';
 import 'package:swift_cafe/cubits/shopping_basket_cubit/shopping_basket_cubit.dart';
 import 'package:swift_cafe/screens/home_screen.dart';
 import 'package:swift_cafe/screens/log_in_screen.dart';
+import 'package:swift_cafe/screens/shopping_basket_screen.dart';
 import 'package:swift_cafe/screens/sign_up_screen.dart';
 import 'package:swift_cafe/simple_bloc_observer.dart';
 import 'cubits/firebase_log_in_cubit/firebase_log_in_cubit.dart';
@@ -31,7 +32,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ShoppingBasketCubit(),
         ),
-
         BlocProvider(
           create: (context) => FirebaseLogInCubit(),
         ),
@@ -46,7 +46,8 @@ class MyApp extends StatelessWidget {
         routes: {
           LogInScreen.id: (context) => const LogInScreen(),
           HomeScreen.id: (context) => const HomeScreen(),
-          SignUpScreen.id: (context) => const SignUpScreen()
+          SignUpScreen.id: (context) => const SignUpScreen(),
+          SoppingBasketScreen.id: (context) => const SoppingBasketScreen()
         },
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

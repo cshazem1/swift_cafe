@@ -33,7 +33,7 @@ String? id;
 
     return Scaffold(
           body: Stack(children: [
-        const Background(),
+         Background(imageUrl: "image/cafe_background.webp"),
         StreamBuilder<QuerySnapshot>(
           stream: _usersStream,
           builder: (context, snapshot) {

@@ -21,7 +21,8 @@ class SignUpScreen extends StatelessWidget {
       child: Scaffold(
           body: Stack(
             children: [
-              const Background(),
+               Background(imageUrl:"https://th.bing.com/th/id/OIP.xesubJn0DWYf6t60IW0FdQHaD5?rs=1&pid=ImgDetMain"
+               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 30.0, vertical: 50),

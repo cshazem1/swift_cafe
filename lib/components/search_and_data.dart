@@ -2,10 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swift_cafe/components/custom_text_name.dart';
 import 'package:swift_cafe/cubits/my_id_cubit/get_id_cubit.dart';
+import 'package:swift_cafe/cubits/shopping_basket_cubit/shopping_basket_cubit.dart';
 import 'package:swift_cafe/models/user_model.dart';
 
 import '../firebase/cloud_storage/users.dart';
+import '../screens/shopping_basket_screen.dart';
 
 class ResearchAndData extends StatefulWidget {
    const ResearchAndData({
@@ -83,22 +86,45 @@ BlocProvider.of<GetIdCubit>(context).getId(userModel!.id);
                           ],
                         ),
                         Row(
+                          mainAxisSize: MainAxisSize.max,
                           children: [
-                            GestureDetector(
-                              onTap:() async {
+                            Stack(
+                              clipBehavior: Clip.none,
+                              children: [
 
-                              } ,
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey.withOpacity(.9),
-                                      borderRadius:
-                                      const BorderRadius.all(Radius.circular(10))),
-                                  height: 40,
-                                  width: 40,
-                                  child: Icon(
-                                    Icons.shopping_basket_rounded,
-                                    color: Colors.black.withOpacity(.8),
-                                  )),
+                                GestureDetector(
+                                  onTap:()  {
+                                Navigator.pushNamed(context, SoppingBasketScreen.id);
+                                  } ,
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey.withOpacity(.9),
+                                          borderRadius:
+                                          const BorderRadius.all(Radius.circular(10))),
+                                      height: 40,
+                                      width: 40,
+                                      child: Center(
+                                        child: Icon(
+                                        Icons.shopping_basket_rounded,
+                                        color: Colors.black.withOpacity(.8),
+                                                                            ),
+                                      )),
+                                ),
+                                BlocBuilder<ShoppingBasketCubit, ShoppingBasketState>(
+  builder: (context, state) {
+
+
+    return Positioned(
+                                    top:-12 ,
+                                    left: -10,
+                                    child: Container(
+padding: EdgeInsets.symmetric(vertical: 1,horizontal: 3),
+                                        decoration: BoxDecoration(color: Colors.deepOrange.withOpacity(.7),borderRadius: const BorderRadius.all(Radius.circular(500))),
+                                        child: TextName(fontSize:18 , textName: '${BlocProvider.of<ShoppingBasketCubit>(context).order.length}+', textOpacity: .7,)));
+  },
+),
+
+                              ],
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10.0),

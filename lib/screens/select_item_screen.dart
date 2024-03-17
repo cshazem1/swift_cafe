@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swift_cafe/cubits/shopping_basket_cubit/shopping_basket_cubit.dart';
 
 import 'package:swift_cafe/models/categry_models.dart';
+import 'package:swift_cafe/models/order_models.dart';
 import 'package:swift_cafe/models/user_model.dart';
 
 import '../components/button_switch.dart';
@@ -14,9 +16,6 @@ import '../cubits/my_id_cubit/get_id_cubit.dart';
 import '../cubits/my_id_cubit/get_id_state.dart';
 import '../helper/show_snack_bar.dart';
 import '../public.dart';
-import '../firebase/cloud_storage/order.dart';
-
-
 
 @immutable
 class SelectItemScreen extends StatefulWidget {
@@ -137,7 +136,6 @@ class _SelectItemScreenState extends State<SelectItemScreen> {
                             const TextStyle(color: Colors.white, fontSize: 25),
                         dropdownColor: Colors.grey,
                         iconEnabledColor: Colors.black,
-
                         value: value,
                         items: dropdownItems,
                         onChanged: (String? x) {
@@ -303,13 +301,24 @@ class _SelectItemScreenState extends State<SelectItemScreen> {
                           listener: (context, state) {
                             if (state is GetIdSuccess) {
                               print("object");
-                              WidgetsBinding.instance.addPostFrameCallback((_) {   showToast(context,"Success");
-
-                            });}
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                showToast(context, "Success");
+                              });
+                            }
                           },
                           child: ElevatedButton(
                             onPressed: () async {
-                              await Order.addOrder(
+                              BlocProvider.of<ShoppingBasketCubit>(context)
+                                  .getUserModel(order_: OrderModels(
+                                      date: date,
+                                      name: widget.categryModels.name,
+                                      image: widget.categryModels.image,
+                                      salary: widget.categryModels.salary,
+                                      filling: choiceFilling,
+                                      milk: choiceMilk,
+                                      sugar: choiceSugar,
+                                      number: value));
+                              /*  await Order.addOrder(
                                   data: date,
                                   name: widget.categryModels.name,
                                   image: widget.categryModels.image,
@@ -318,14 +327,16 @@ class _SelectItemScreenState extends State<SelectItemScreen> {
                                   milk: choiceMilk,
                                   sugar: choiceSugar,
                                   number: value,
-                                  id: BlocProvider.of<GetIdCubit>(context).id!);
-    WidgetsBinding.instance.addPostFrameCallback((_) {   showToast(context,"Success");
-    Navigator.pop(context);
+                                  id: BlocProvider.of<GetIdCubit>(context).id!);*/
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                showToast(context, "Success");
+                                Navigator.pop(context);
+                              });
+                            }
+                            // ignore: use_build_context_synchronously
 
-    });}
-                              // ignore: use_build_context_synchronously
-
-,                            style: ElevatedButton.styleFrom(
+                            ,
+                            style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.green),
                             child: const TextName(
                               textName: "Submit ",
@@ -355,9 +366,3 @@ class _SelectItemScreenState extends State<SelectItemScreen> {
     );
   }
 }
-
-
-
-
-
-

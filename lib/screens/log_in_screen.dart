@@ -14,7 +14,7 @@ class LogInScreen extends StatelessWidget {
     return Scaffold(
         body: Stack(
       children: [
-        const Background(),
+         Background(imageUrl: "image/cafe_background.webp"),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50),
           child: Container(

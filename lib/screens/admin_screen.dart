@@ -33,7 +33,7 @@ class _AdminScreenState extends State<AdminScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
-        const Background(),
+         Background(imageUrl:"image/cafe_background.webp"),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50),
           child: Container(
